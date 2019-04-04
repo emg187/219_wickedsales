@@ -5,9 +5,12 @@ import React from 'react';
 import {Route} from "react-router-dom";
 import ProductRoutes from "./products"; //without specified file, it grabs index
 import Home from "./home";
+import Nav from "./nav";
 
 const App = () => (
     <div>
+        <Nav/>
+
         <Route exact path="/" component={Home}/>
         <Route path="/products" component={ProductRoutes}/>
     </div>
