@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import ProductDetailImages from "./product_detail_images";
 
 class ProductDetails extends Component {
     state = {
@@ -31,10 +32,15 @@ class ProductDetails extends Component {
         }
       
         const {description, name} = details;
+        details.images = details.images.map((imageSrc, index)=>{
+            return <ProductDetailImages key={index} src={imageSrc}/>
+        });
+        
         return (
             <div className="product-details">
                 <h1 className="center">{name}</h1>
-                <p>{description}</p>
+                {details.images}
+                <p className="center">{description}</p>
             </div>
         );
     }
