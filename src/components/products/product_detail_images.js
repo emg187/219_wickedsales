@@ -9,5 +9,5 @@ export default props=>{
         "marginBottom": "5%"
     };
 
-    return <img src={`../dist/${props.src}`} style={style} className="center"/>
+    return <img src={`/dist/${props.src}`} style={style} className="center"/>
 };
