@@ -6,6 +6,38 @@
             background-color: lightgray;
         }
     }
+
+    .product-details {
+        .product-price {
+            font-size: 3.5em;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            font-size: 2em;
+
+            .qty-container {
+                margin: 0 30px;
+
+                button {
+                    margin: 0 12px;
+                }
+
+                .product-qty {
+                    padding: 5px 15px;
+                    position: relative;
+                    top: 5px;
+                    background-color: #efefef;
+                }
+            }
+        }
+    }
+
+    .carousel {
+        .indicators {
+            background-color: #eee;
+        }
+    }
 }
 
 
