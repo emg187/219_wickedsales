@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
-import ProductDetailImages from "./product_detail_images";
+import ProductCarousel from "./product_detail_images";
 
 class ProductDetails extends Component {
     state = {
@@ -31,15 +31,11 @@ class ProductDetails extends Component {
             return <h1 className="center">No Product Found</h1>
         }
       
-        const {description, name} = details;
-        details.images = details.images.map((imageSrc, index)=>{
-            return <ProductDetailImages key={index} src={imageSrc}/>
-        });
-        
+        const {description, name, images} = details;
         return (
             <div className="product-details">
                 <h1 className="center">{name}</h1>
-                {details.images}
+                <ProductCarousel images={images}/>
                 <p className="center">{description}</p>
             </div>
         );

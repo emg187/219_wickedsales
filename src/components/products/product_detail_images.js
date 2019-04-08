@@ -1,13 +1,30 @@
-import React from "react";
+import React, {Component} from "react";
 
-export default props=>{
-    const style = {
-        "height": "20vh",
-        "width": "20%",
-        "marginRight": "5%", 
-        "marginLeft": "7%", 
-        "marginBottom": "5%"
-    };
+class ProductCarousel extends Component {
+    componentDidMount(){
+        console.log("Carousel div:", this.carousel);
+        M.Carousel.init(this.carousel);
+    }
 
-    return <img src={`/dist/${props.src}`} style={style} className="center"/>
-};
+    render(){
+        console.log("Props:", this.props);
+
+        const items = this.props.images.map((image)=>{
+            return (
+                <a key={image} className="carousel-item" href="#">
+                    <img src={`/dist/${image}`} alt="Product Image"/>
+                </a>
+            );  
+        });
+
+        return (
+            <div ref={(element)=>this.carousel=element} className="carousel">
+               {items}
+            </div>
+        );
+    }
+}
+
+export default ProductCarousel;
+
+
