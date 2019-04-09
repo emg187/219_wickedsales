@@ -11,7 +11,7 @@ if (empty($_GET["product_id"])){
 }
 
 $product_id = intval($_GET["product_id"]); //turns potential injection attacks into 0
-$product_quantity = 1;
+$cart_quantity = $product_quantity = 1;
 $users_id = 1;
 
 $query = "SELECT `price` FROM `products` WHERE `id`=$product_id";
@@ -63,6 +63,19 @@ if (empty($_SESSION["cart_id"])){
     if (mysqli_affected_rows($conn)===0){
         throw new Exception("Cart data was not updated");
     }
+    $cart_select_query = "SELECT `item_count`, `total_price` FROM `carts` WHERE `id`=$cart_id";
+    $cart_select_result = mysqli_query($conn, $cart_select_query);
+
+    if (!$cart_select_result){
+        throw new Exception("Unable to get updated cart data");
+    }
+    if (mysqli_num_rows($cart_select_result)===0){
+        throw new Exception("No cart data found");
+    }
+
+    $row = mysqli_fetch_assoc($cart_select_result);
+    $cart_quantity = $row["item_count"];
+    $product_total = $row["total_price"];
 }
 
 $cart_item_query = "INSERT INTO `cart_items` SET 
@@ -83,7 +96,7 @@ if (mysqli_affected_rows($conn)===0){
 
 $output = [
     "success"=>true,
-    "cartCount"=>$product_quantity, 
+    "cartCount"=>$cart_quantity, 
     "cartTotal"=>$product_total
 ];
 
