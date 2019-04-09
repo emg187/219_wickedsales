@@ -103,4 +103,3 @@ $output = [
 print(json_encode($output));
 ?>
 
-
