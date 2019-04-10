@@ -3,6 +3,7 @@ import axios from "axios";
 import ProductCarousel from "./product_detail_images";
 import {formatMoney} from "../../helpers/index";
 import MiscDetails from "./misc_details";
+import ProductAdd from "./product_add";
 
 class ProductDetails extends Component {
     state = {
@@ -26,6 +27,7 @@ class ProductDetails extends Component {
 
     render(){
         const {details} = this.state;
+        const {params} = this.props.match;
 
         if (!details===null){
             return <h1>Loading...</h1>
@@ -41,20 +43,7 @@ class ProductDetails extends Component {
                     <ProductCarousel images={images}/>
                     <div className="col s12 m4">
                         <div className="right-align product-price">{formatMoney(price)}</div>
-                        <div className="right-align add-to-cart">
-                            <span className="qty-container">
-                                <button className="btn btn-small btn-floating purple">
-                                    <i className="material-icons">remove</i>
-                                </button>
-                                <span className="product-qty">1</span>
-                                <button className="btn btn-small btn-floating purple">
-                                    <i className="material-icons">add</i>
-                                </button>
-                            </span>
-                            <button className="btn">
-                                <i className="material-icons">add_shopping_cart</i>
-                            </button>
-                        </div>
+                        <ProductAdd productId={params.product_id}/>
                         <p>{description}</p>
                         <MiscDetails details={miscDetails}/>
                     </div>
