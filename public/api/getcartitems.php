@@ -16,7 +16,7 @@ if (empty($_SESSION["cart_id"])){
 } 
 
     $cart_id = $_SESSION["cart_id"];
-    $cart_items_query = "SELECT * FROM `cart_items` WHERE `carts_id`=$cart_id AND `users_id`=$user_id";
+    $cart_items_query = "SELECT * FROM `cart_items` WHERE `carts_id`=$cart_id";
     $cart_items_result = mysqli_query($conn, $cart_items_query);
 
     while ($row = mysqli_fetch_assoc($cart_items_result)){
