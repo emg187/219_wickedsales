@@ -9,7 +9,7 @@ $output = [
 ];
 
 $json_input = file_get_contents("php://input");
-$input = json_decode($json_input, true); //the 'true' converts objects into associative arrays
+$input = json_decode($json_input, true); 
 
 if (empty($input["email"])){
     throw new Exception("email is a required value");
@@ -21,7 +21,9 @@ if (empty($input["password"])){
 $email = $input["email"];
 $password = $input["password"];
 $hashedpassword = sha1($password);
+
 unset($input["password"]);
+$email = addslashes($email);
 
 $query = "SELECT `id`, `name` FROM `users` 
             WHERE `email`='$email' AND `password`='$hashedpassword'";
