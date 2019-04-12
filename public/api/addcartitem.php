@@ -6,12 +6,17 @@ require_once("config.php");
 
 set_exception_handler("handleError");
 
+$product_quantity = 1;
+if (!empty($_GET["quantity"])){
+    $product_quantity = $_GET["quantity"];
+}
+
 if (empty($_GET["product_id"])){
     throw new Exception("You must send a product_id (int) with your request");
 }
 
-$product_id = intval($_GET["product_id"]); //turns potential injection attacks into 0
-$cart_quantity = $product_quantity = 1;
+$product_id = intval($_GET["product_id"]); //turns potential string injection attacks into 0
+$cart_quantity = $product_quantity;
 $users_id = 1;
 
 $query = "SELECT `price` FROM `products` WHERE `id`=$product_id";
