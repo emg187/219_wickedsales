@@ -21,13 +21,16 @@ if (empty($input["password"])){
 $email = $input["email"];
 $password = $input["password"];
 $hashedpassword = sha1($password);
-
 unset($input["password"]);
-$email = addslashes($email);
+//$email = addslashes($email);
 
 $query = "SELECT `id`, `name` FROM `users` 
-            WHERE `email`='$email' AND `password`='$hashedpassword'";
-$result = mysqli_query($conn, $query); //reference to resulting data
+            WHERE `email`= ? AND `password`= ?"; 
+$statement = mysqli_prepare($conn, $query); //sends safe query to db
+mysqli_stmt_bind_param($statement, 'ss', $email, $hashedpassword); //send dangerous data to db
+
+mysqli_stmt_execute($statement); //tell db to mix the query and the data
+$result = mysqli_stmt_get_result($statement); //get result pointer 
 
 if (!$result){
     throw new Exception(mysqli_error($conn));
