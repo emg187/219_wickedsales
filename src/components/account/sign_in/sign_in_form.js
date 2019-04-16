@@ -1,10 +1,14 @@
 import React from "react";
-import {reduxForm} from "redux-form"; 
+import {reduxForm, Field} from "redux-form"; 
+import Input from "../../general/input";
 
 const SignInForm = props=>{
+
     return (
-        <form>
-            <h1>Form goes here</h1>
+        <form onSubmit={props.handleSubmit(props.signIn)}>
+            <Field id="email" name="email" component={Input} label="Email"/>
+            <Field id="password" name="password" component={Input} type="password" label="Password"/>
+            <button className="btn">Sign In</button>
         </form>
     );
 }
