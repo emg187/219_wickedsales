@@ -8,6 +8,7 @@ export default props=>{
         <div className="input-field">
             <input {...props.input} id={props.id} type={type}/>
             <label htmlFor={props.id}>{props.label}</label>
+            <p className="red-text">{props.meta.touched && props.meta.error}</p>
         </div>
     );
 }
